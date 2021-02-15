@@ -30,8 +30,7 @@ const button5 = new Button('Decode token', () => {
 })
 
 const button6 = new Button('Get user data', () => {
-   const token = getToken()
-   getUserData(token)
+   getUserData()
     .then((user) => console.log('Get user data', user))
     .catch((user) => console.error('Get user data', user))
 })

@@ -1,6 +1,14 @@
 import { Button } from './components'
 
-import { signIn, signUp, getToken, decodeToken, getUserData, updateUser } from './auth'
+import {
+    signIn,
+    signUp,
+    getToken,
+    decodeToken,
+    getUserData,
+    updateUser,
+    sendPasswordResetEmail
+} from './auth'
 
 const button1 = new Button('Login (wrong credentials)', () => {
     signIn('example@example.com', 'fake-password')
@@ -32,13 +40,19 @@ const button5 = new Button('Decode token', () => {
 const button6 = new Button('Get user data', () => {
     getUserData()
         .then((user) => console.log('Get user data', user))
-        .catch((user) => console.error('Get user data', user))
+        .catch((error) => console.error('Get user data', error))
 })
 
 const button7 = new Button('Update user data', () => {
     updateUser()
         .then((user) => console.log('Update user data', user))
-        .catch((user) => console.error('Update user data', user))
+        .catch((error) => console.error('Update user data', error))
+})
+
+const button8 = new Button('Send password reset email', () => {
+    sendPasswordResetEmail('kontakt@coderoad.pl')
+        .then((user) => console.log('Send password reset email', user))
+        .catch((error) => console.error('Send password reset email', error))
 })
 
 document.body.appendChild(button1.render())
@@ -48,3 +62,4 @@ document.body.appendChild(button4.render())
 document.body.appendChild(button5.render())
 document.body.appendChild(button6.render())
 document.body.appendChild(button7.render())
+document.body.appendChild(button8.render())

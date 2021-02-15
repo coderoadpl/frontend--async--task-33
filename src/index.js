@@ -1,6 +1,6 @@
 import { Button } from './components'
 
-import { signIn, signUp, getToken, decodeToken } from './auth'
+import { signIn, signUp, getToken, decodeToken, getUserData } from './auth'
 
 const button1 = new Button('Login (wrong credentials)', () => {
     signIn('example@example.com', 'fake-password')
@@ -29,8 +29,16 @@ const button5 = new Button('Decode token', () => {
    console.log(decodeToken(token))
 })
 
+const button6 = new Button('Get user data', () => {
+   const token = getToken()
+   getUserData(token)
+    .then((user) => console.log('Get user data', user))
+    .catch((user) => console.error('Get user data', user))
+})
+
 document.body.appendChild(button1.render())
 document.body.appendChild(button2.render())
 document.body.appendChild(button3.render())
 document.body.appendChild(button4.render())
 document.body.appendChild(button5.render())
+document.body.appendChild(button6.render())

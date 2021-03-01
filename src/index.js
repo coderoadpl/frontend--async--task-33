@@ -8,7 +8,8 @@ import {
     getUserData,
     updateUser,
     sendPasswordResetEmail,
-    deleteUser
+    deleteUser,
+    makeAuthorizedRequest
 } from './auth'
 
 const button1 = new Button('Login (wrong credentials)', () => {
@@ -62,6 +63,12 @@ const button9 = new Button('Delete user', () => {
         .catch((error) => console.error('Delete user', error))
 })
 
+const button10 = new Button('Make authorized request', () => {
+    makeAuthorizedRequest('https://coderoad--sandbox-default-rtdb.firebaseio.com/.json')
+        .then((data) => console.log('Make authorized request', data))
+        .catch((error) => console.error('Make authorized request', error))
+})
+
 document.body.appendChild(button1.render())
 document.body.appendChild(button2.render())
 document.body.appendChild(button3.render())
@@ -71,3 +78,4 @@ document.body.appendChild(button6.render())
 document.body.appendChild(button7.render())
 document.body.appendChild(button8.render())
 document.body.appendChild(button9.render())
+document.body.appendChild(button10.render())

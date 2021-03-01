@@ -9,7 +9,8 @@ import {
     updateUser,
     sendPasswordResetEmail,
     deleteUser,
-    makeAuthorizedRequest
+    makeAuthorizedRequest,
+    checkIfUserIsLoggedIn
 } from './auth'
 
 const button1 = new Button('Login (wrong credentials)', () => {
@@ -74,6 +75,15 @@ const button11 = new Button('Make authorized request with query params', () => {
         .then((data) => console.log('Make authorized request with query params', data))
         .catch((error) => console.error('Make authorized request with query params', error))
 })
+
+checkIfUserIsLoggedIn()
+    .then((isLoggedIn) => {
+        const p = document.createElement('p')
+
+        p.innerText = isLoggedIn ? 'LOGGED IN' : 'NOT LOGGED IN'
+
+        document.body.appendChild(p)
+    })
 
 document.body.appendChild(button1.render())
 document.body.appendChild(button2.render())

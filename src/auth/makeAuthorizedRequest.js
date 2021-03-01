@@ -6,7 +6,9 @@ export const makeAuthorizedRequest = (url, options) => {
 
     if (!token) return Promise.reject('No token found')
 
-    const urlWithToken = `${url}?auth=${token}`
+    const containsQuestionMark = url.indexOf('?') !== -1
+
+    const urlWithToken = `${url}${containsQuestionMark ? '&' : '?'}auth=${token}`
 
     return makeRequest(urlWithToken, options)
 }

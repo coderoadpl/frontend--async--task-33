@@ -69,6 +69,12 @@ const button10 = new Button('Make authorized request', () => {
         .catch((error) => console.error('Make authorized request', error))
 })
 
+const button11 = new Button('Make authorized request with query params', () => {
+    makeAuthorizedRequest('https://coderoad--sandbox-default-rtdb.firebaseio.com/dinosaurs/.json?orderBy="$key"&startAt="a"&endAt="m"')
+        .then((data) => console.log('Make authorized request with query params', data))
+        .catch((error) => console.error('Make authorized request with query params', error))
+})
+
 document.body.appendChild(button1.render())
 document.body.appendChild(button2.render())
 document.body.appendChild(button3.render())
@@ -79,3 +85,4 @@ document.body.appendChild(button7.render())
 document.body.appendChild(button8.render())
 document.body.appendChild(button9.render())
 document.body.appendChild(button10.render())
+document.body.appendChild(button11.render())

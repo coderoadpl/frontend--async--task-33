@@ -1,10 +1,10 @@
 import { makeRequest } from './makeRequest'
-import { getToken } from './token'
+import { getIdToken } from './token'
 
 const UPDATE_USER_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBLgVFUKq8psWokJWXVKR6Q-LhISj308q4'
 
 export const updateUser = (displayName, photoUrl) => {
-    const token = getToken()
+    const token = getIdToken()
 
     if (!token) return Promise.reject('No token found')
 

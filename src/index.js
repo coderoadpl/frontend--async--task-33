@@ -3,7 +3,7 @@ import { Button } from './components'
 import {
     signIn,
     signUp,
-    getToken,
+    getIdToken,
     decodeToken,
     getUserData,
     updateUser,
@@ -31,11 +31,11 @@ const button3 = new Button('Sign up', () => {
 })
 
 const button4 = new Button('Get token', () => {
-    console.log(getToken())
+    console.log(getIdToken())
 })
 
 const button5 = new Button('Decode token', () => {
-    const token = getToken()
+    const token = getIdToken()
     console.log(decodeToken(token))
 })
 

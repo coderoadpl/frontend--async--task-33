@@ -1,10 +1,10 @@
 import { makeRequest } from './makeRequest'
-import { getToken } from './token'
+import { getIdToken } from './token'
 
 const GET_USER_DATA_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBLgVFUKq8psWokJWXVKR6Q-LhISj308q4'
 
 export const getUserData = () => {
-    const token = getToken()
+    const token = getIdToken()
 
     if (!token) return Promise.reject('No token found')
 

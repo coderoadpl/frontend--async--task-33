@@ -1,8 +1,8 @@
 import { makeRequest } from './makeRequest'
-import { getToken } from './token'
+import { getIdToken } from './token'
 
 export const makeAuthorizedRequest = (url, options) => {
-    const token = getToken()
+    const token = getIdToken()
 
     if (!token) return Promise.reject('No token found')
 

@@ -7,7 +7,8 @@ import {
     decodeToken,
     getUserData,
     updateUser,
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+    deleteUser
 } from './auth'
 
 const button1 = new Button('Login (wrong credentials)', () => {
@@ -23,7 +24,7 @@ const button2 = new Button('Login (good credentials)', () => {
 })
 
 const button3 = new Button('Sign up', () => {
-    signUp('kontakt+2@coderoad.pl', 'secret')
+    signUp('kontakt@coderoad.pl', 'secret')
         .then((data) => console.log('sign up resolved', data))
         .catch((error) => console.error('sign up rejected', error))
 })
@@ -55,6 +56,12 @@ const button8 = new Button('Send password reset email', () => {
         .catch((error) => console.error('Send password reset email', error))
 })
 
+const button9 = new Button('Delete user', () => {
+    deleteUser()
+        .then((data) => console.log('Delete user', data))
+        .catch((error) => console.error('Delete user', error))
+})
+
 document.body.appendChild(button1.render())
 document.body.appendChild(button2.render())
 document.body.appendChild(button3.render())
@@ -63,3 +70,4 @@ document.body.appendChild(button5.render())
 document.body.appendChild(button6.render())
 document.body.appendChild(button7.render())
 document.body.appendChild(button8.render())
+document.body.appendChild(button9.render())

@@ -1,3 +1,4 @@
+import { logOut } from './logOut'
 import { makeRequest } from './makeRequest'
 import { getIdToken } from './token'
 
@@ -16,7 +17,10 @@ export const deleteUser = () => {
                 idToken: token
             })
         }
-    )
+    ).then((data) => {
+        logOut()
+        return data
+    })
 }
 
 export default deleteUser

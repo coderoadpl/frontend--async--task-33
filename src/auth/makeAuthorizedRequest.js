@@ -22,6 +22,9 @@ export const makeAuthorizedRequest = (url, options) => {
 
                         return makeRequest(urlWithRefreshedToken, options)
                     })
+                    .catch(() => {
+                        throw error
+                    })
             }
             throw error
         })

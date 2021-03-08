@@ -21,6 +21,17 @@ const setIsLoggedIn = (newIsLoggedIn) => {
     render()
 }
 
+const makeAppRequest = (url, options) => {
+    return makeAuthorizedRequest(url, options)
+        .catch((error) => {
+            if(error.code === 401) {
+                logOut()
+                    .then(() => setIsLoggedIn(false))
+            }
+            throw error
+        })
+}
+
 checkIfUserIsLoggedIn()
     .then(setIsLoggedIn)
 
@@ -88,13 +99,13 @@ const render = () => {
     })
 
     const button10 = new Button('Make authorized request', () => {
-        makeAuthorizedRequest('https://coderoad--sandbox-default-rtdb.firebaseio.com/.json')
+        makeAppRequest('https://coderoad--sandbox-default-rtdb.firebaseio.com/.json')
             .then((data) => console.log('Make authorized request', data))
             .catch((error) => console.error('Make authorized request', error))
     })
 
     const button11 = new Button('Make authorized request with query params', () => {
-        makeAuthorizedRequest('https://coderoad--sandbox-default-rtdb.firebaseio.com/dinosaurs/.json?orderBy="$key"&startAt="a"&endAt="m"')
+        makeAppRequest('https://coderoad--sandbox-default-rtdb.firebaseio.com/dinosaurs/.json?orderBy="$key"&startAt="a"&endAt="m"')
             .then((data) => console.log('Make authorized request with query params', data))
             .catch((error) => console.error('Make authorized request with query params', error))
     })

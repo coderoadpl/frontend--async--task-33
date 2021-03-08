@@ -3,7 +3,10 @@ export const makeRequest = (url, options) => {
         .then((response) => {
             return response.json()
                 .then((data) => {
-                    if (!response.ok) throw data
+                    if (!response.ok) throw {
+                        data,
+                        code: response.status
+                    }
                     return data
                 })
         })

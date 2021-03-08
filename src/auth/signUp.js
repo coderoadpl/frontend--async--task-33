@@ -1,7 +1,8 @@
 import { makeRequest } from './makeRequest'
 import { setIdToken, setRefreshToken } from './token'
+import { FIREBASE_APP_KEY } from './const'
 
-const SIGN_UP_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBLgVFUKq8psWokJWXVKR6Q-LhISj308q4'
+const SIGN_UP_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + FIREBASE_APP_KEY
 
 export const signUp = (email, password) => {
     return makeRequest(

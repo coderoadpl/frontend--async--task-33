@@ -1,6 +1,7 @@
 import { makeRequest } from './makeRequest'
+import { FIREBASE_APP_KEY } from './const'
 
-const PASSWORD_RESET_EMAIL_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBLgVFUKq8psWokJWXVKR6Q-LhISj308q4'
+const PASSWORD_RESET_EMAIL_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=' + FIREBASE_APP_KEY
 
 export const sendPasswordResetEmail = (email) => {
     return makeRequest(

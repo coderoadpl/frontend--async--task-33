@@ -1,0 +1,1 @@
+export const FIREBASE_APP_KEY = 'AIzaSyBLgVFUKq8psWokJWXVKR6Q-LhISj308q4'

@@ -1,8 +1,9 @@
 import { makeRequest } from './makeRequest'
 import { logOut } from './logOut'
 import { getRefreshToken, setIdToken, setRefreshToken } from './token'
+import { FIREBASE_APP_KEY } from './const'
 
-const REFRESH_TOKEN_URL = 'https://securetoken.googleapis.com/v1/token?key=AIzaSyBLgVFUKq8psWokJWXVKR6Q-LhISj308q4'
+const REFRESH_TOKEN_URL = 'https://securetoken.googleapis.com/v1/token?key=' + FIREBASE_APP_KEY
 
 export const refreshTokens = () => {
     const refreshToken = getRefreshToken()

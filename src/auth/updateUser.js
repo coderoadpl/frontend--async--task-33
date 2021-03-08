@@ -1,7 +1,8 @@
 import { makeRequest } from './makeRequest'
 import { getIdToken } from './token'
+import { FIREBASE_APP_KEY } from './const'
 
-const UPDATE_USER_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBLgVFUKq8psWokJWXVKR6Q-LhISj308q4'
+const UPDATE_USER_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=' + FIREBASE_APP_KEY
 
 export const updateUser = (displayName, photoUrl) => {
     const token = getIdToken()

@@ -1,4 +1,5 @@
 import { makeRequest } from './makeRequest'
+import { logOut } from './logOut'
 import { getRefreshToken, setIdToken, setRefreshToken } from './token'
 
 const REFRESH_TOKEN_URL = 'https://securetoken.googleapis.com/v1/token?key=AIzaSyBLgVFUKq8psWokJWXVKR6Q-LhISj308q4'
@@ -23,4 +24,10 @@ export const refreshTokens = () => {
 
         return data
     }))
+    .catch((error) => {
+        return logOut()
+            .finally(() => {
+                throw error
+            })
+    })
 }

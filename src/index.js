@@ -24,9 +24,8 @@ const setIsLoggedIn = (newIsLoggedIn) => {
 const makeAppRequest = (url, options) => {
     return makeAuthorizedRequest(url, options)
         .catch((error) => {
-            if(error.code === 401) {
-                logOut()
-                    .then(() => setIsLoggedIn(false))
+            if (error.code === 401) {
+                setIsLoggedIn(false)
             }
             throw error
         })

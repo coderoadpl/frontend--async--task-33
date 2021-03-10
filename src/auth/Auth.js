@@ -1,3 +1,5 @@
+import { checkIfUserIsLoggedIn } from './checkIfUserIsLoggedIn'
+
 export class Auth {
 
     constructor(props) {
@@ -9,21 +11,36 @@ export class Auth {
         this.ComponentNotLoggedIn = ComponentNotLoggedIn
         this.ComponentLoggedIn = ComponentLoggedIn
 
+        this.container = null
         this.isLoggedIn = false
+
+        this.init()
+    }
+
+    init() {
+        checkIfUserIsLoggedIn()
+            .then((isLoggedIn) => {
+                this.isLoggedIn = isLoggedIn
+                this.render()
+            })
     }
 
     render() {
-        const container = document.createElement('div')
+        if (!this.container) {
+            this.container = document.createElement('div')
+        }
+
+        this.container.innerHTML = ''
 
         if (this.isLoggedIn) {
             const elementLoggedIn = new this.ComponentLoggedIn()
-            container.appendChild(elementLoggedIn.render())
+            this.container.appendChild(elementLoggedIn.render())
         } else {
             const elementNotLoggedIn = new this.ComponentNotLoggedIn()
-            container.appendChild(elementNotLoggedIn.render())
+            this.container.appendChild(elementNotLoggedIn.render())
         }
 
-        return container
+        return this.container
     }
 
 }

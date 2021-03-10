@@ -8,16 +8,20 @@ export class Auth {
 
         this.ComponentNotLoggedIn = ComponentNotLoggedIn
         this.ComponentLoggedIn = ComponentLoggedIn
+
+        this.isLoggedIn = false
     }
 
     render() {
         const container = document.createElement('div')
 
-        const elementNotLoggedIn = new this.ComponentNotLoggedIn()
-        const elementLoggedIn = new this.ComponentLoggedIn()
-
-        container.appendChild(elementNotLoggedIn.render())
-        container.appendChild(elementLoggedIn.render())
+        if (this.isLoggedIn) {
+            const elementLoggedIn = new this.ComponentLoggedIn()
+            container.appendChild(elementLoggedIn.render())
+        } else {
+            const elementNotLoggedIn = new this.ComponentNotLoggedIn()
+            container.appendChild(elementNotLoggedIn.render())
+        }
 
         return container
     }

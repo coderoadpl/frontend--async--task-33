@@ -1,11 +1,23 @@
 export class Auth {
 
-    constructor(){}
+    constructor(props) {
+        const {
+            componentNotLoggedIn,
+            componentLoggedIn,
+        } = props
 
-    render(){
+        this.componentNotLoggedIn = componentNotLoggedIn
+        this.componentLoggedIn = componentLoggedIn
+    }
+
+    render() {
         const container = document.createElement('div')
 
-        container.innerText = 'Auth'
+        const elementNotLoggedIn = new this.componentNotLoggedIn()
+        const elementLoggedIn = new this.componentLoggedIn()
+
+        container.appendChild(elementNotLoggedIn.render())
+        container.appendChild(elementLoggedIn.render())
 
         return container
     }

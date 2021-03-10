@@ -1,6 +1,6 @@
 import Auth from './auth'
 
-import LoginForms from './components' 
+import LoginForms from './components/LoginForms' 
 
 import App from './App'
 

@@ -5,10 +5,10 @@ export class App {
 
     constructor(props) {
         const {
-            checkIfUserIsLoggedInThenChangeLoggedInState
+            setLoggedIn
         } = props
 
-        this.checkIfUserIsLoggedInThenChangeLoggedInState = checkIfUserIsLoggedInThenChangeLoggedInState
+        this.setLoggedIn = setLoggedIn
     }
 
     render() {
@@ -17,7 +17,7 @@ export class App {
         const buttonElement = new Button('Log out', () => {
             return logOut()
                 .then(() => {
-                    return this.checkIfUserIsLoggedInThenChangeLoggedInState()
+                    return this.setLoggedIn(false)
                 })
         })
 

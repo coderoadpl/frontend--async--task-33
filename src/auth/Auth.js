@@ -24,15 +24,23 @@ export class Auth {
         this.checkIfUserIsLoggedInThenChangeLoggedInState()
     }
 
+    setLoggedIn(newLoggedIn) {
+        this.isLoggedIn = newLoggedIn
+        this.render()
+    }
+
+    setIsLoading(newLoading) {
+        this.isLoading = newLoading
+        this.render()
+    }
+
     checkIfUserIsLoggedInThenChangeLoggedInState() {
         return checkIfUserIsLoggedIn()
             .then((isLoggedIn) => {
-                this.isLoggedIn = isLoggedIn
-                this.render()
+                this.setLoggedIn(isLoggedIn)
             })
             .finally(() => {
-                this.isLoading = false
-                this.render()
+                this.setIsLoading(false)
             })
     }
 
@@ -50,18 +58,21 @@ export class Auth {
         }
 
         const checkIfUserIsLoggedInThenChangeLoggedInState = this.checkIfUserIsLoggedInThenChangeLoggedInState.bind(this)
+        const setLoggedIn = this.setLoggedIn.bind(this)
+        const setIsLoading = this.setIsLoading.bind(this)
+        const componentProps = {
+            checkIfUserIsLoggedInThenChangeLoggedInState,
+            setLoggedIn,
+            setIsLoading
+        }
 
         if (!this.isLoggedIn) {
-            const elementNotLoggedIn = new this.ComponentNotLoggedIn({
-                checkIfUserIsLoggedInThenChangeLoggedInState
-            })
+            const elementNotLoggedIn = new this.ComponentNotLoggedIn(componentProps)
             this.container.appendChild(elementNotLoggedIn.render())
             return this.container
         }
 
-        const elementLoggedIn = new this.ComponentLoggedIn({
-            checkIfUserIsLoggedInThenChangeLoggedInState
-        })
+        const elementLoggedIn = new this.ComponentLoggedIn(componentProps)
         this.container.appendChild(elementLoggedIn.render())
         return this.container
     }

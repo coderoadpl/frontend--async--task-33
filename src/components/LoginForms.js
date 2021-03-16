@@ -6,10 +6,10 @@ export class LoginForms {
 
     constructor(props) {
         const {
-            checkIfUserIsLoggedInThenChangeLoggedInState
+            setLoggedIn
         } = props
 
-        this.checkIfUserIsLoggedInThenChangeLoggedInState = checkIfUserIsLoggedInThenChangeLoggedInState
+        this.setLoggedIn = setLoggedIn
      }
 
     render() {
@@ -18,7 +18,7 @@ export class LoginForms {
         const buttonElement = new Button('Log in', () => {
             return signIn('kontakt@coderoad.pl', 'secret')
                 .then(() => {
-                    return  this.checkIfUserIsLoggedInThenChangeLoggedInState()
+                    return  this.setLoggedIn(true)
                 })
         })
 

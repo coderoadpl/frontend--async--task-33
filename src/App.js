@@ -1,11 +1,27 @@
+import { logOut } from './auth'
+import Button from './components/Button'
+
 export class App {
 
-    constructor(){}
+    constructor(props) {
+        const {
+            checkIfUserIsLoggedInThenChangeLoggedInState
+        } = props
 
-    render(){
+        this.checkIfUserIsLoggedInThenChangeLoggedInState = checkIfUserIsLoggedInThenChangeLoggedInState
+    }
+
+    render() {
         const container = document.createElement('div')
 
-        container.innerText = 'App'
+        const buttonElement = new Button('Log out', () => {
+            return logOut()
+                .then(() => {
+                    return this.checkIfUserIsLoggedInThenChangeLoggedInState()
+                })
+        })
+
+        container.appendChild(buttonElement.render())
 
         return container
     }

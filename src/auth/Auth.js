@@ -21,7 +21,11 @@ export class Auth {
     }
 
     init() {
-        checkIfUserIsLoggedIn()
+        this.checkIfUserIsLoggedInThenChangeLoggedInState()
+    }
+
+    checkIfUserIsLoggedInThenChangeLoggedInState(){
+        return checkIfUserIsLoggedIn()
             .then((isLoggedIn) => {
                 this.isLoggedIn = isLoggedIn
                 this.render()
@@ -45,8 +49,11 @@ export class Auth {
             return this.container
         }
 
+        const checkIfUserIsLoggedInThenChangeLoggedInState = this.checkIfUserIsLoggedInThenChangeLoggedInState.bind(this)
         if (!this.isLoggedIn) {
-            const elementNotLoggedIn = new this.ComponentNotLoggedIn()
+            const elementNotLoggedIn = new this.ComponentNotLoggedIn({
+                checkIfUserIsLoggedInThenChangeLoggedInState
+            })
             this.container.appendChild(elementNotLoggedIn.render())
             return this.container
         }

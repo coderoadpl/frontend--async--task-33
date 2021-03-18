@@ -5,13 +5,15 @@ export class Input {
             text,
             onChange,
             placeholder = '',
-            type = 'text'
+            type = 'text',
+            isFocused = false
         } = props
 
         this.text = text
         this.onChange = onChange
         this.placeholder = placeholder
         this.type = type
+        this.isFocused = isFocused
     }
 
     render() {
@@ -27,6 +29,7 @@ export class Input {
         input.style.borderRadius = '4px'
         input.style.padding = '4px'
         input.style.boxSizing = 'border-box'
+        input.style.marginBottom = '10px'
 
         input.setAttribute('placeholder', this.placeholder)
         input.setAttribute('type', this.type)
@@ -35,6 +38,8 @@ export class Input {
             'input',
             (event) => this.onChange(event.target.value)
         )
+
+        if (this.isFocused) queueMicrotask(() => input.focus())
 
         return input
 

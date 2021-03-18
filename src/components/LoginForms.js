@@ -1,5 +1,6 @@
 import LoginForm from './LoginForm'
 import RegistrationForm from './RegistrationForm'
+import Button from './Button'
 
 export class LoginForms {
 
@@ -11,6 +12,21 @@ export class LoginForms {
         this.container = null
 
         this.setLoggedIn = setLoggedIn
+
+        this.view = 'login'
+    }
+
+    setView(newView) {
+        this.view = newView
+        this.render()
+    }
+
+    toggleView() {
+        if (this.view === 'login') {
+            this.setView('registration')
+        } else {
+            this.setView('login')
+        }
     }
 
     render() {
@@ -20,16 +36,26 @@ export class LoginForms {
 
         this.container.innerHTML = ''
 
-        const loginFormElement = new LoginForm({
-            setLoggedIn: this.setLoggedIn,
-        })
-        
-        const registrationFormElement = new RegistrationForm({
-            setLoggedIn: this.setLoggedIn,
-        })
-      
-        this.container.appendChild(loginFormElement.render())
-        this.container.appendChild(registrationFormElement.render())
+        if (this.view === 'login') {
+            const loginFormElement = new LoginForm({
+                setLoggedIn: this.setLoggedIn,
+            })
+            this.container.appendChild(loginFormElement.render())
+        }
+
+        if (this.view === 'registration') {
+            const registrationFormElement = new RegistrationForm({
+                setLoggedIn: this.setLoggedIn,
+            })
+            this.container.appendChild(registrationFormElement.render())
+        }
+
+        const buttonElement = new Button(
+            this.view === 'login' ? 'Go to registration' : 'Go to log in',
+            this.toggleView.bind(this)
+        )
+
+        this.container.appendChild(buttonElement.render())
 
         return this.container
     }

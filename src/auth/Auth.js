@@ -54,7 +54,6 @@ export class Auth {
         if (this.isLoading) {
             const elementLoader = new this.ComponentLoader()
             this.container.appendChild(elementLoader.render())
-            return this.container
         }
 
         const checkIfUserIsLoggedInThenChangeLoggedInState = this.checkIfUserIsLoggedInThenChangeLoggedInState.bind(this)

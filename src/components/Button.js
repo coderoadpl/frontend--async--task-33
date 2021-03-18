@@ -18,6 +18,7 @@ export class Button {
         button.style.padding = '4px'
         button.style.cursor = 'pointer'
         button.style.width = '100px'
+        button.style.marginBottom = '10px'
 
         if (this.onClick) {
             button.addEventListener(

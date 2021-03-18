@@ -1,11 +1,11 @@
-import { signIn } from '../auth'
+import { signUp } from '../auth'
 
 import Button from './Button'
 import Input from './Input'
 import Loader from './Loader'
 import Message from './Message'
 
-export class LoginForm {
+export class RegistrationForm {
 
     constructor(props) {
         const {
@@ -19,6 +19,7 @@ export class LoginForm {
         this.focusedInput = 'email'
         this.email = ''
         this.password = ''
+        this.retypePassword = ''
 
         this.isLoading = false
         this.errorMessage = null
@@ -45,15 +46,34 @@ export class LoginForm {
         this.focusedInput = 'password'
         this.render()
     }
+    
+    setRetypePassword(newRetypePassword) {
+        this.retypePassword = newRetypePassword
+        this.focusedInput = 'retype-password'
+        this.render()
+    }
 
-    onLogInClick() {
+    onRegisterClick() {
+        if(this.password !== this.retypePassword) {
+            this.setErrorMessage('Passwords did not match!')
+            return Promise.reject('Passwords did not match!')
+        }
+
         this.setIsLoading(true)
-        return signIn(this.email, this.password)
+        return signUp(this.email, this.password)
             .then(() => {
                 return this.setLoggedIn(true)
             })
             .catch((error) => {
-                this.setErrorMessage('Login error ocurred!')
+                if(error.data.error.message === 'EMAIL_EXISTS'){
+                    this.setErrorMessage('This account seems to be already registered!')
+                } else if (error.data.error.message === 'WEAK_PASSWORD : Password should be at least 6 characters') {
+                    this.setErrorMessage('Password should be at least 6 characters!')
+                } else if (error.data.error.message === 'INVALID_EMAIL') {
+                    this.setErrorMessage('Please type valid email!')
+                } else {
+                    this.setErrorMessage('Registration error ocurred!')
+                }
             })
             .finally(() => {
                 this.setIsLoading(false)
@@ -85,11 +105,19 @@ export class LoginForm {
             type: 'password',
             isFocused: this.focusedInput === 'password'
         })
+        const retypePasswordInputElement = new Input({
+            text: this.retypePassword,
+            onChange: this.setRetypePassword.bind(this),
+            placeholder: 'Retype password',
+            type: 'password',
+            isFocused: this.focusedInput === 'retype-password'
+        })
 
-        const buttonElement = new Button('Log in', this.onLogInClick.bind(this))
+        const buttonElement = new Button('Register account', this.onRegisterClick.bind(this))
         
         this.container.appendChild(emailInputElement.render())
         this.container.appendChild(passwordInputElement.render())
+        this.container.appendChild(retypePasswordInputElement.render())
         this.container.appendChild(buttonElement.render())
         if(this.errorMessage) {
             const errorMessageElement = new Message(this.errorMessage)
@@ -101,4 +129,4 @@ export class LoginForm {
 
 }
 
-export default LoginForm
+export default RegistrationForm

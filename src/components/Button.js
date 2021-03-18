@@ -17,7 +17,7 @@ export class Button {
         button.style.borderRadius = '4px'
         button.style.padding = '4px'
         button.style.cursor = 'pointer'
-        button.style.width = '100px'
+        button.style.width = '100%'
         button.style.marginBottom = '10px'
 
         if (this.onClick) {

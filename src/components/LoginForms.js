@@ -1,4 +1,5 @@
 import LoginForm from './LoginForm'
+import RegistrationForm from './RegistrationForm'
 
 export class LoginForms {
 
@@ -22,8 +23,13 @@ export class LoginForms {
         const loginFormElement = new LoginForm({
             setLoggedIn: this.setLoggedIn,
         })
+        
+        const registrationFormElement = new RegistrationForm({
+            setLoggedIn: this.setLoggedIn,
+        })
       
         this.container.appendChild(loginFormElement.render())
+        this.container.appendChild(registrationFormElement.render())
 
         return this.container
     }
